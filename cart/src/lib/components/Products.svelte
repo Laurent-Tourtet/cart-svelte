@@ -9,6 +9,11 @@
 </script>
 
 <main>
+    <div class="header">
+        <button class="cart-btn">
+            <a href="/cart" class="view-cart-link">Voir mon panier</a>
+        </button>
+    </div>
     <section class="products-header">
         <h1 class="products-header--title">Bienvenue dans notre boutique</h1>
         <p class="products-header--paragraphe">Retrouvez tous nos produits actuellement dans notre boutique</p>
@@ -36,6 +41,31 @@
 </main>
 
 <style>
+     main {
+        position: relative;
+        padding-top: 2rem;
+    }
+
+    /* Positionner le bouton en haut à droite */
+    .header {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+    .view-cart-link {
+        color: white;
+        text-decoration: none;
+    }
+    .cart-btn {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+    .cart-btn:hover {
+        background-color: #555;
+    }
     .products-header {
         display: flex;
         flex-direction: column;

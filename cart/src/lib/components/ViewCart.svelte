@@ -1,8 +1,6 @@
 
 <main>
-<button>
-    <a href="/cart" class="view-cart-link">Voir mon panier</a>
-</button>
+
 <button>
     <a href="/" class="view-cart-link">Continuer vos achats</a>
 </button>
