@@ -1,32 +1,26 @@
+// cartStore.js
 import { writable } from 'svelte/store';
 
 export const cart = writable([]);
 
-// Fonction pour récupérer le panier depuis sessionStorage si disponible
-function getCartFromSessionStorage() {
-    if (typeof window !== 'undefined') { // Assurez-vous que ce code s'exécute uniquement côté client
-        const storedCart = sessionStorage.getItem('cart');
-        if (storedCart) {
-            return JSON.parse(storedCart); // Retourner le panier enregistré
-        }
-    }
-    return []; // Si pas de panier en sessionStorage, retourner un tableau vide
-}
-
 // Fonction pour mettre à jour sessionStorage
 function updateCartInSessionStorage(newCart) {
-    if (typeof window !== 'undefined') { // Assurez-vous que ce code s'exécute uniquement côté client
+    if (typeof window !== 'undefined') { // Vérification côté client
         sessionStorage.setItem('cart', JSON.stringify(newCart));
     }
 }
 
-// Initialisation du panier avec les données de sessionStorage si elles existent
-export function initializeCart() {
-    const initialCart = getCartFromSessionStorage();
-    cart.set(initialCart);
+// Initialiser le panier avec les données de sessionStorage si disponibles
+function initializeCart() {
+    if (typeof window !== 'undefined') {
+        const storedCart = sessionStorage.getItem('cart');
+        if (storedCart) {
+            cart.set(JSON.parse(storedCart));
+        }
+    }
 }
 
-// Mettre à jour le panier
+// Mettre à jour le panier et sessionStorage
 export function updateCart(newCart) {
     cart.set(newCart);
     updateCartInSessionStorage(newCart);
@@ -35,12 +29,33 @@ export function updateCart(newCart) {
 // Ajouter un article au panier
 export function addToCart(product) {
     cart.update(currentCart => {
-        const updatedCart = [...currentCart, product];
+        // Vérifie que le produit a bien une image avant d'ajouter
+        if (!product.image) {
+            console.error('Le produit n\'a pas d\'image:', product);
+        }
+
+        // Recherche si l'article est déjà dans le panier
+        const existingProduct = currentCart.find(item => item.id === product.id);
+        let updatedCart;
+
+        if (existingProduct) {
+            // Incrémente la quantité si l'article existe déjà
+            updatedCart = currentCart.map(item =>
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+        } else {
+            // Ajoute le produit avec une quantité initiale de 1 et l'image
+            updatedCart = [...currentCart, { ...product, quantity: 1 }];
+        }
+
+        // Mise à jour du panier dans le sessionStorage
         updateCartInSessionStorage(updatedCart);
         return updatedCart;
-        
     });
 }
+
 
 // Supprimer un article du panier
 export function removeFromCart(productId) {
@@ -50,3 +65,6 @@ export function removeFromCart(productId) {
         return updatedCart;
     });
 }
+
+// Initialise le panier avec les données de sessionStorage lors de l'import du store
+initializeCart();

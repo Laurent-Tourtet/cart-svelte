@@ -2,9 +2,9 @@
     import { addToCart } from '$lib/stores/cartStore';
 
     let products = [
-        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, quantity: 1 },
-        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, quantity: 1 },
-        { id: 3, name: 'Chaussures', description: 'Des chaussures en coton bio', price: 80, quantity: 1 }
+        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, quantity: 1, image: "/images/t-shirt.jpg" },
+        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, quantity: 1, image: "/images/pantalon.jpg" },
+        { id: 3, name: 'Basket', description: 'baskets', price: 80, quantity: 1, image: "/images/basket.jpg" }
     ];
 </script>
 
@@ -19,9 +19,15 @@
             {#each products as product}
                 <li class="products-cards--list-item">
                     <h2 class="products-cards--list-item--name">{product.name}</h2>
+                    <img class="products-cards--img" src={product.image} alt={product.name} />
                     <p class="products-cards--list-item--description">{product.description}</p>
                     <p class="products-cards--list-item--price">{product.price} €</p>
-                    <button class="products-cards--list-item--button" on:click={() => addToCart(product)}>Ajouter au panier</button>
+                    <button class="products-cards--list-item--button" on:click={() => {
+                        console.log('Produit avant ajout au panier:', product); // Vérifie ici que l'image est bien présente
+                        addToCart(product);
+                    }}>
+                        Ajouter au panier
+                    </button>
                     
                 </li>
             {/each}
@@ -92,6 +98,12 @@
         color: rgb(47, 45, 172);
         margin-bottom: 0.5rem;
         text-align: right;
+    }
+    .products-cards--img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
     }
 
     .products-cards--list-item--button {

@@ -2,39 +2,10 @@
     import { cart, removeFromCart } from '$lib/stores/cartStore';
     import { onMount } from 'svelte';
     import { loadStripe } from '@stripe/stripe-js';
-    
-    $: console.log($cart);
-    
-    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); // Remplacez par votre clé publique
 
-    // Fonction pour récupérer le panier depuis sessionStorage si disponible
-    const getCartFromSessionStorage = () => {
-        const storedCart = sessionStorage.getItem('cart');
-        if (storedCart) {
-            return JSON.parse(storedCart); // Retourner le panier enregistré
-        }
-        return []; // Si pas de panier en sessionStorage, retourner un tableau vide
-    };
+    $: console.log("panier:", $cart);
 
-    // Mettre à jour sessionStorage quand le panier change
-    const updateCartInSessionStorage = (newCart) => {
-        sessionStorage.setItem('cart', JSON.stringify(newCart));
-    };
-
-    // Initialisation du panier à l'intérieur de onMount
-    onMount(() => {
-        const initialCart = getCartFromSessionStorage();
-        // Mettre à jour le store cart avec les données du sessionStorage
-        cart.set(initialCart);
-    });
-
-    // Fonction d'ajout au panier (mettre à jour à la fois le store et sessionStorage)
-    const addToCart = (product) => {
-        const newCart = [...$cart, product];
-        cart.set(newCart);
-        updateCartInSessionStorage(newCart);
-        
-    };
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
     // Fonction pour créer une session de paiement Stripe
     async function checkout() {
@@ -47,7 +18,8 @@
                     id: item.id,
                     name: item.name,
                     price: item.price,
-                    quantity: item.quantity
+                    quantity: item.quantity,
+                    image: item.image
                 }))
             })
         });
@@ -64,10 +36,11 @@
 <div>
     <h2>Vos articles</h2>
     <section class="cart">
-        <p class="cart-article">Vous avez {$cart.length} article dans votre panier</p>
+        <p class="cart-article">Vous avez {$cart.length} article(s) dans votre panier</p>
         <ul class="cart-list">
             {#each $cart as item (item.id)}
                 <li class="cart-list--item">
+                    <img src="{item.image}" alt="{item.name}" class="product-image" />
                     {item.name} - {item.quantity} × ${item.price} €
                     <button class="cart-button" on:click={() => removeFromCart(item.id)}>Supprimer</button>
                 </li>
@@ -86,7 +59,7 @@
         padding: 0.7rem;
         background-color: #555;
         border-radius: 4px;
-        box-shadow:     0 1px 5px rgba(34, 12, 177, 0.583);
+        box-shadow: 0 1px 5px rgba(34, 12, 177, 0.583);
     }
 
     h2 {
@@ -95,7 +68,7 @@
         color: azure;
     }
 
-   .cart-article {
+    .cart-article {
         margin-bottom: 3rem;
         font-size: 1.2rem;
         text-align: center;
@@ -110,20 +83,29 @@
 
     .cart-list--item {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         margin-bottom: 0.5rem;
-        text-shadow:    0 1px 5px rgba(8, 8, 10, 0.899);
+        text-shadow: 0 1px 5px rgba(8, 8, 10, 0.899);
     }
 
-    button {
+    .product-image {
+        width: 60px;
+        height: 60px;
+        margin-right: 1rem;
+        object-fit: cover;
+    }
+
+    .cart-button {
         background-color: #4307ea;
         color: white;
         border: none;
         padding: 0.5rem 1rem;
         cursor: pointer;
+        border-radius: 4px;
     }
 
-    button:hover {
+    .cart-button:hover {
         background-color: #121010;
     }
 </style>
