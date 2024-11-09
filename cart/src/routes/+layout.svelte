@@ -1,6 +1,5 @@
 <script>
     import '../global.css';
-    import ViewCart from '$lib/components/ViewCart.svelte';
 </script>
 
 <header class="top">

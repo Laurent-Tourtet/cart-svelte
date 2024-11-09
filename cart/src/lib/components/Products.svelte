@@ -11,7 +11,7 @@
 <main>
     <div class="header">
         <button class="cart-btn">
-            <a href="/cart" class="view-cart-link">Voir mon panier</a>
+            <a href="/cart" class="view-cart-link">Voir mon panier({addToCart.length})</a>
         </button>
     </div>
     <section class="products-header">
@@ -27,18 +27,20 @@
                     <img class="products-cards--img" src={product.image} alt={product.name} />
                     <p class="products-cards--list-item--description">{product.description}</p>
                     <p class="products-cards--list-item--price">{product.price} €</p>
-                    <button class="products-cards--list-item--button" on:click={() => {
-                        console.log('Produit avant ajout au panier:', product); // Vérifie ici que l'image est bien présente
-                        addToCart(product);
-                    }}>
+                    <button class="products-cards--list-item--button" on:click={() => addToCart(product)}>
                         Ajouter au panier
                     </button>
-                    
+                    <button
+                        on:click={() => { window.location.href = `/products/${product.id}` }}
+                    >
+                        Voir le produit
+                    </button>
                 </li>
             {/each}
         </ul>
     </section>
 </main>
+
 
 <style>
      main {
