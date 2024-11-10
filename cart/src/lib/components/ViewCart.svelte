@@ -1,23 +1,39 @@
+<script>
+    
+    import {addToCart, totalItems} from '$lib/stores/cartStore';
+</script>
 
 <main>
-
-<button>
-    <a href="/" class="view-cart-link">Continuer vos achats</a>
-</button>
+    <div class="header">
+        <button class="cart-btn">
+            <a href="/cart" class="view-cart-link">Voir mon panier({$totalItems})</a>
+        </button>
+    </div>
 </main>
-<style>
+    <style>
+        main {
+        position: relative;
+        padding-top: 2rem;
+    }
+    .header {
+       
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
     .view-cart-link {
         color: white;
         text-decoration: none;
     }
-    button {
+    .cart-btn {
+        width: 200px;
         background-color: #333;
         color: white;
         border: none;
         padding: 0.5rem 1rem;
         cursor: pointer;
     }
-    button:hover {
+    .cart-btn:hover {
         background-color: #555;
     }
 </style>

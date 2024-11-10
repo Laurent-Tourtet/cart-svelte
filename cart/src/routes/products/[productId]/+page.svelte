@@ -1,6 +1,10 @@
 <script>
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
+    import { addToCart } from '$lib/stores/cartStore';
+    import ViewCart from '$lib/components/ViewCart.svelte';
+    import Return from '$lib/components/Return.svelte';
+
 
     // Utilisation du paramètre `productId` de la route dynamique
     const {productId }= $page.params; // Accès au `productId` depuis l'URL
@@ -24,13 +28,18 @@
         }
     });
 </script>
-
+<ViewCart />
 <main>
+    
+<Return />
     {#if product}
         <h1>{product.name}</h1>
         <img src={product.image} alt={product.name} />
         <p>{product.description}</p>
         <p>Prix: {product.price} €</p>
+        <button class="products-cards--list-item--button" on:click={() => addToCart(product)}>
+            Ajouter au panier
+        </button>
     {:else}
         <p>Produit non trouvé.</p>
     {/if}

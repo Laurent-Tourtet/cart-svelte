@@ -1,5 +1,5 @@
 // cartStore.js
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
 export const cart = writable([]);
 
@@ -56,7 +56,6 @@ export function addToCart(product) {
     });
 }
 
-
 // Supprimer un article du panier
 export function removeFromCart(productId) {
     cart.update(currentCart => {
@@ -65,6 +64,11 @@ export function removeFromCart(productId) {
         return updatedCart;
     });
 }
+
+// Store dérivée pour le nombre total de produits dans le panier
+export const totalItems = derived(cart, $cart =>
+    $cart.reduce((total, item) => total + item.quantity, 0)
+);
 
 // Initialise le panier avec les données de sessionStorage lors de l'import du store
 initializeCart();

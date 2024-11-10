@@ -1,12 +1,13 @@
 <script>
     import '../global.css';
+       
 </script>
 
 <header class="top">
 
     <h1>Votre Panier</h1>
 </header>
-
+ 
 <slot />
 <style>
     .top {

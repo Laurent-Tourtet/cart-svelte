@@ -1,5 +1,6 @@
 <script>
-    import { addToCart } from '$lib/stores/cartStore';
+    import { addToCart, totalItems } from '$lib/stores/cartStore';
+    import ViewCart from './ViewCart.svelte';
 
     let products = [
         { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, quantity: 1, image: "/images/t-shirt.jpg" },
@@ -9,11 +10,8 @@
 </script>
 
 <main>
-    <div class="header">
-        <button class="cart-btn">
-            <a href="/cart" class="view-cart-link">Voir mon panier({addToCart.length})</a>
-        </button>
-    </div>
+    <ViewCart />
+  
     <section class="products-header">
         <h1 class="products-header--title">Bienvenue dans notre boutique</h1>
         <p class="products-header--paragraphe">Retrouvez tous nos produits actuellement dans notre boutique</p>
@@ -49,25 +47,7 @@
     }
 
     /* Positionner le bouton en haut à droite */
-    .header {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }
-    .view-cart-link {
-        color: white;
-        text-decoration: none;
-    }
-    .cart-btn {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-    }
-    .cart-btn:hover {
-        background-color: #555;
-    }
+    
     .products-header {
         display: flex;
         flex-direction: column;

@@ -2,6 +2,8 @@
     import { cart, removeFromCart } from '$lib/stores/cartStore';
     import { onMount } from 'svelte';
     import { loadStripe } from '@stripe/stripe-js';
+    import Return from './Return.svelte';
+    
 
     $: console.log("panier:", $cart);
 
@@ -34,6 +36,7 @@
 </script>
 
 <div>
+    <Return />
     <h2>Vos articles</h2>
     <section class="cart">
         <p class="cart-article">Vous avez {$cart.length} article(s) dans votre panier</p>
