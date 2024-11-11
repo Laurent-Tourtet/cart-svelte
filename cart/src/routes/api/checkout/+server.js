@@ -26,8 +26,8 @@ export async function POST({ request }) {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: 'http://localhost:5173/stripe/success', // Remplace par ton URL de succès
-      cancel_url: 'http://localhost:5173/stripe/cancel', // Remplace par ton URL d'annulation
+      success_url: 'https://64ed-31-35-198-173.ngrok-free.app/stripe/success', // Remplace par ton URL de succès
+      cancel_url: 'https://64ed-31-35-198-173.ngrok-free.app/stripe/cancel', // Remplace par ton URL d'annulation
     });
 
     return json({ id: session.id });

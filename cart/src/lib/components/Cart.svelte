@@ -1,16 +1,13 @@
 <script>
     import { cart, removeFromCart } from '$lib/stores/cartStore';
-    import { onMount } from 'svelte';
     import { loadStripe } from '@stripe/stripe-js';
     import Return from './Return.svelte';
-    
-
-    $: console.log("panier:", $cart);
 
     const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
     // Fonction pour créer une session de paiement Stripe
     async function checkout() {
+        sessionStorage.setItem('cartProducts', JSON.stringify($cart));
         const stripe = await stripePromise;
         const response = await fetch('/api/checkout', {
             method: 'POST',

@@ -1,13 +1,47 @@
+<script>
+    import { cart } from '$lib/stores/cartStore';
+    import { onMount } from 'svelte';
+
+    let canceledProducts = [];
+    let cartItems = [];
+
+    // Abonnez-vous au store cart pour surveiller les changements
+    $: cartItems = $cart;
+    console.log("Produits dans cart.svelte :", cartItems);
+
+    // Récupérer les produits depuis sessionStorage lors du chargement de la page
+    onMount(() => {
+        if (typeof window !== 'undefined') {
+            const storedProducts = sessionStorage.getItem('cart');
+            canceledProducts = storedProducts ? JSON.parse(storedProducts) : [];
+            
+            if (canceledProducts.length === 0) {
+                // Si aucun produit n'est trouvé dans sessionStorage, utiliser les produits dans cart
+                canceledProducts = cartItems;
+            }
+
+            console.log("Produits récupérés dans cancel.svelte :", canceledProducts);
+        }
+    });
+</script>
+
 <main>
     <div class="products-header">
-        <h1 class="products-header--title">Your payment was canceled</h1>
-        <p class="products-header--paragraphe">You can try again or continue shopping</p>
+        <h1 class="products-header--title">Votre paiement a été annulé</h1>
+        <p class="products-header--paragraphe">Vous pouvez réessayer ou continuer vos achats.</p>
     </div>
     <div class="products-cards">
         <ul class="products-cards--list">
-            <li class="products-cards--list-item">
-                <h2 class="products-cards--list-item--name">Product 1</h2>
-                <p class="products-cards--list-item--description">Description of product 1</p>
+            {#each canceledProducts as product}
+                <li class="products-cards--list-item">
+                    <h2 class="products-cards--list-item--name">{product.name}</h2>
+                    <p class="products-cards--list-item--description">{product.description}</p>
+                    <p class="products-cards--list-item--quantity">Quantité : {product.quantity}</p>
+                    <p class="products-cards--list-item--price">Prix : {product.price} €</p>
+                </li>
+            {/each}
+        </ul>
+    </div>
 </main>
 
 <style>
@@ -55,9 +89,10 @@
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
     }
-    .products-cards--list-item--description {
+    .products-cards--list-item--description,
+    .products-cards--list-item--quantity,
+    .products-cards--list-item--price {
         color: rgb(126, 135, 135);
         margin-bottom: 0.5rem;
     }
-
 </style>

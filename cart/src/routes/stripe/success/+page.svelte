@@ -1,13 +1,28 @@
+<script>
+    let purchasedProducts = [];
+
+    // Récupérer les produits achetés depuis sessionStorage
+    if (typeof window !== 'undefined') {
+        const storedProducts = sessionStorage.getItem('cartProducts');
+        purchasedProducts = storedProducts ? JSON.parse(storedProducts) : [];
+    }
+</script>
+
 <main>
     <div class="products-header">
-        <h1 class="products-header--title">Success</h1>
-        <p class="products-header--paragraphe">Your payment was successful</p>
+        <h1 class="products-header--title">Merci pour votre achat !</h1>
+        <p class="products-header--paragraphe">Voici les produits que vous avez achetés :</p>
     </div>
     <div class="products-cards">
         <ul class="products-cards--list">
-            <li class="products-cards--list-item">
-                <h2 class="products-cards--list-item--name">Product 1</h2>
-                <p class="products-cards--list-item--description">Description of product 1</p>
+            {#each purchasedProducts as product}
+                <li class="products-cards--list-item">
+                    <h2 class="products-cards--list-item--name">{product.name}</h2>
+                    <p class="products-cards--list-item--description">{product.description}</p>
+                </li>
+            {/each}
+        </ul>
+    </div>
 </main>
 
 <style>
