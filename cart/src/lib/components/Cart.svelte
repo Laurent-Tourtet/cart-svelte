@@ -41,12 +41,22 @@
             {#each $cart as item (item.id)}
                 <li class="cart-list--item">
                     <img src="{item.image}" alt="{item.name}" class="product-image" />
-                    {item.name} - {item.quantity} × ${item.price} €
-                    <button class="cart-button" on:click={() => removeFromCart(item.id)}>Supprimer</button>
+                    {item.name} - {item.quantity} × ${item.price} € 
+                    <button class="cart-button" on:click={() => removeFromCart(item.id)} aria-label="button delete article">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    
                 </li>
             {/each}
         </ul>
-        <button class="cart-button" on:click={checkout}>Passer à la caisse</button>
+        
+            <p class="cart-article">Total : {$cart.reduce((acc, item) => acc + item.price * item.quantity, 0)} €</p>
+            {#if $cart.length > 0}
+            <button class="cart-button" on:click={checkout} aria-label="button got ot paiement">Passer au paiement</button>
+           
+            {:else}
+            <button class="cart-button--empty">Votre panier est vide</button>
+        {/if}
     </section>
 </div>
 
@@ -56,7 +66,7 @@
         flex-direction: column;
         max-width: 400px;
         margin: 0 auto;
-        padding: 0.7rem;
+        padding: 1rem;
         background-color: #555;
         border-radius: 4px;
         box-shadow: 0 1px 5px rgba(34, 12, 177, 0.583);
@@ -77,7 +87,8 @@
 
     .cart-list {
         list-style: none;
-        color: blue;
+        color: rgb(224, 224, 245);
+        font-weight: 700;
         padding: 0;
     }
 
@@ -90,15 +101,16 @@
     }
 
     .product-image {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         margin-right: 1rem;
+        margin-bottom: 1rem;
         object-fit: cover;
     }
 
     .cart-button {
         background-color: #4307ea;
-        color: white;
+        color: rgb(249, 241, 241);
         border: none;
         padding: 0.5rem 1rem;
         cursor: pointer;
@@ -106,6 +118,7 @@
     }
 
     .cart-button:hover {
-        background-color: #121010;
+        background-color: #faf4f4;
+        color: #4307ea;
     }
 </style>

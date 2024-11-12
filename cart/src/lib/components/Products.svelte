@@ -28,7 +28,7 @@
                     <button class="products-cards--list-item--button" on:click={() => addToCart(product)}>
                         Ajouter au panier
                     </button>
-                    <button
+                    <button class="products-cards--list-item--button"
                         on:click={() => { window.location.href = `/products/${product.id}` }}
                     >
                         Voir le produit
@@ -72,6 +72,7 @@
         flex-direction: column;
         max-width: 1000px;
         margin: 0 auto;
+        
     }
 
     .products-cards--list {
@@ -80,15 +81,16 @@
         gap: 1rem;
         list-style: none;
         padding: 0;
+        
     }
 
     .products-cards--list-item {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 1px solid #ddd;
+        /* border: 1px solid #ddd; */
         padding: 1rem;
-        background-color: #fff;
+        background-color: #908d8d;
         box-shadow: 1px 4px 8px rgba(55, 20, 230, 0.1);
         border-radius: 4px;
     }
@@ -102,7 +104,9 @@
 
     .products-cards--list-item--description {
         color: rgb(72, 67, 67);
-        margin-bottom: 0.5rem;
+        margin: 1rem;
+        text-align: center;
+        text-shadow: 0 1px 2px rgba(8, 8, 10, 0.899);
     }
 
     .products-cards--list-item--price {
@@ -116,6 +120,7 @@
         height: 200px;
         object-fit: cover;
         border-radius: 4px;
+        box-shadow:    1px 1px 5px rgba(0, 0, 0, 0.1);
     }
 
     .products-cards--list-item--button {

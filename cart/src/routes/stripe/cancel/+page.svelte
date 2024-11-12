@@ -35,6 +35,7 @@
             {#each canceledProducts as product}
                 <li class="products-cards--list-item">
                     <h2 class="products-cards--list-item--name">{product.name}</h2>
+                    <img class="products-cards--img" src={product.image} alt={product.name} />
                     <p class="products-cards--list-item--description">{product.description}</p>
                     <p class="products-cards--list-item--quantity">Quantité : {product.quantity}</p>
                     <p class="products-cards--list-item--price">Prix : {product.price} €</p>
@@ -66,6 +67,12 @@
         flex-direction: column;
         max-width: 600px;
         margin: 2rem auto;
+    }
+
+    .products-cards--img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
     }
     .products-cards--list {
         display: flex;
