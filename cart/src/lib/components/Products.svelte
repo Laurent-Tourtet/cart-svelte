@@ -81,7 +81,7 @@
         gap: 1rem;
         list-style: none;
         padding: 0;
-        
+        margin-bottom: 30px;
     }
 
     .products-cards--list-item {
