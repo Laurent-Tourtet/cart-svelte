@@ -5,7 +5,8 @@
 
 <header class="top">
 
-    <h1>Votre Panier</h1>
+    <h1>Votre Boutique</h1>
+    
 </header>
  
 <slot />

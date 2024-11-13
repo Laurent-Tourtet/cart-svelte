@@ -1,17 +1,26 @@
 <script>
     import { addToCart, totalItems } from '$lib/stores/cartStore';
+    import QuantitySelector from './QuantitySelector.svelte';
     import ViewCart from './ViewCart.svelte';
 
     let products = [
-        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, quantity: 1, image: "/images/t-shirt.jpg" },
-        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, quantity: 1, image: "/images/pantalon.jpg" },
-        { id: 3, name: 'Basket', description: 'baskets', price: 80, quantity: 1, image: "/images/basket.jpg" }
+        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, image: "/images/t-shirt.jpg" },
+        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, image: "/images/pantalon.jpg" },
+        { id: 3, name: 'Basket', description: 'baskets', price: 80, image: "/images/basket.jpg" }
     ];
+
+    // Quantités sélectionnées pour chaque produit
+    let selectedQuantities = products.map(() => 1);
+
+    function handleQuantityChange(event, index) {
+        selectedQuantities[index] = event.detail.quantity;
+        console.log(`Quantité sélectionnée pour ${products[index].name} :`, selectedQuantities[index]);
+    }
 </script>
 
 <main>
     <ViewCart />
-  
+
     <section class="products-header">
         <h1 class="products-header--title">Bienvenue dans notre boutique</h1>
         <p class="products-header--paragraphe">Retrouvez tous nos produits actuellement dans notre boutique</p>
@@ -19,15 +28,28 @@
 
     <section class="products-cards">
         <ul class="products-cards--list">
-            {#each products as product}
+            {#each products as product, index}
                 <li class="products-cards--list-item">
                     <h2 class="products-cards--list-item--name">{product.name}</h2>
                     <img class="products-cards--img" src={product.image} alt={product.name} />
                     <p class="products-cards--list-item--description">{product.description}</p>
-                    <p class="products-cards--list-item--price">{product.price} €</p>
-                    <button class="products-cards--list-item--button" on:click={() => addToCart(product)}>
+                    <p class="products-cards--list-item--price">Prix unitaire : {product.price} €</p>
+
+                    <!-- Composant QuantitySelector -->
+                    <QuantitySelector
+                        bind:quantity={selectedQuantities[index]}
+                        min={1}
+                        max={10}
+                        on:quantityChange={(event) => handleQuantityChange(event, index)}
+                    />
+
+                    <!-- Calcul du prix total pour chaque produit en fonction de la quantité -->
+                    <p class="products-cards--list-item--price">Prix total : {product.price * selectedQuantities[index]} €</p>
+
+                    <button class="products-cards--list-item--button" on:click={() => addToCart({ ...product, quantity: selectedQuantities[index] })}>
                         Ajouter au panier
                     </button>
+
                     <button class="products-cards--list-item--button"
                         on:click={() => { window.location.href = `/products/${product.id}` }}
                     >
@@ -39,15 +61,13 @@
     </section>
 </main>
 
-
 <style>
-     main {
+    main {
         position: relative;
         padding-top: 2rem;
     }
 
-    /* Positionner le bouton en haut à droite */
-    
+    /* Style des sections */
     .products-header {
         display: flex;
         flex-direction: column;
@@ -72,7 +92,6 @@
         flex-direction: column;
         max-width: 1000px;
         margin: 0 auto;
-        
     }
 
     .products-cards--list {
@@ -88,11 +107,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* border: 1px solid #ddd; */
         padding: 1rem;
         background-color: #908d8d;
         box-shadow: 1px 4px 8px rgba(55, 20, 230, 0.1);
         border-radius: 4px;
+        align-items: center; /* Centre les éléments horizontalement */
     }
 
     .products-cards--list-item--name {
@@ -106,21 +125,22 @@
         color: rgb(72, 67, 67);
         margin: 1rem;
         text-align: center;
-        text-shadow: 0 1px 2px rgba(8, 8, 10, 0.899);
+        text-shadow: 0 1px 1px rgb(8, 8, 10);
     }
 
     .products-cards--list-item--price {
         font-weight: bold;
         color: rgb(47, 45, 172);
         margin-bottom: 0.5rem;
-        text-align: right;
+        text-align: center;
     }
+
     .products-cards--img {
         width: 100%;
         height: 200px;
         object-fit: cover;
         border-radius: 4px;
-        box-shadow:    1px 1px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     }
 
     .products-cards--list-item--button {

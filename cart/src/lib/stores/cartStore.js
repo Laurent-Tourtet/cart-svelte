@@ -1,6 +1,7 @@
 // cartStore.js
 import { writable, derived } from 'svelte/store';
 
+// Initialisation du store cart
 export const cart = writable([]);
 
 // Fonction pour mettre à jour sessionStorage
@@ -23,13 +24,13 @@ function initializeCart() {
 // Appelle la fonction d'initialisation pour charger le panier lors de l'import du store
 initializeCart();
 
-// Mettre à jour le panier et sessionStorage
+// Fonction pour mettre à jour le panier et sessionStorage
 export function updateCart(newCart) {
     cart.set(newCart);
     updateCartInSessionStorage(newCart);
 }
 
-// Ajouter un article au panier
+// Fonction pour ajouter un produit au panier avec une quantité spécifique
 export function addToCart(product) {
     cart.update(currentCart => {
         // Vérifie que le produit contient une image, sinon log une erreur
@@ -45,12 +46,12 @@ export function addToCart(product) {
             // Incrémente la quantité si l'article est déjà présent
             updatedCart = currentCart.map(item =>
                 item.id === product.id
-                    ? { ...item, quantity: item.quantity + 1 }
+                    ? { ...item, quantity: item.quantity + product.quantity }
                     : item
             );
         } else {
-            // Ajoute le produit avec une quantité initiale de 1
-            updatedCart = [...currentCart, { ...product, quantity: 1 }];
+            // Ajoute le produit avec la quantité passée
+            updatedCart = [...currentCart, { ...product, quantity: product.quantity }];
         }
 
         // Mise à jour du panier dans le sessionStorage
@@ -59,7 +60,7 @@ export function addToCart(product) {
     });
 }
 
-// Supprimer un article du panier
+// Fonction pour supprimer un produit du panier
 export function removeFromCart(productId) {
     cart.update(currentCart => {
         const updatedCart = currentCart.filter(item => item.id !== productId);

@@ -2,6 +2,7 @@
     import { cart, removeFromCart } from '$lib/stores/cartStore';
     import { loadStripe } from '@stripe/stripe-js';
     import Return from './Return.svelte';
+    
 
     const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
