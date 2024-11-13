@@ -4,9 +4,9 @@
     import ViewCart from './ViewCart.svelte';
 
     let products = [
-        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, image: "/images/t-shirt.jpg" },
-        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, image: "/images/pantalon.jpg" },
-        { id: 3, name: 'Basket', description: 'baskets', price: 80, image: "/images/basket.jpg" }
+        { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, image: "/images/t-shirt.jpg", category: "vetements" },
+        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, image: "/images/pantalon.jpg", category: "vetements" },
+        { id: 3, name: 'Basket', description: 'baskets', price: 80, image: "/images/basket.jpg", category: "chaussures" }
     ];
 
     // Quantités sélectionnées pour chaque produit
