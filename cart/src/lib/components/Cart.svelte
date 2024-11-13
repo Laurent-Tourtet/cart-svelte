@@ -56,7 +56,7 @@
             <button class="cart-button" on:click={checkout} aria-label="button got ot paiement">Passer au paiement</button>
            
             {:else}
-            <button class="cart-button--empty">Votre panier est vide</button>
+            <p class="cart-button--empty">Votre panier est vide</p>
         {/if}
     </section>
 </div>
@@ -68,7 +68,7 @@
         max-width: 400px;
         margin: 0 auto;
         padding: 1rem;
-        background-color: #555;
+        background-color: #908d8d;
         border-radius: 4px;
         box-shadow: 0 1px 5px rgba(34, 12, 177, 0.583);
     }
@@ -76,7 +76,7 @@
     h2 {
         margin-bottom: 3rem;
         text-align: center;
-        color: azure;
+        color: rgb(158, 161, 161);
     }
 
     .cart-article {
@@ -108,8 +108,7 @@
         margin-bottom: 1rem;
         object-fit: cover;
     }
-
-    .cart-button {
+    .cart-button{
         background-color: #4307ea;
         color: rgb(249, 241, 241);
         border: none;
@@ -117,9 +116,23 @@
         cursor: pointer;
         border-radius: 4px;
     }
-
     .cart-button:hover {
         background-color: #faf4f4;
         color: #4307ea;
     }
+
+    .cart-button--empty {
+        background-color: #4307ea;
+        color: rgb(249, 241, 241);
+        border: none;
+        padding: 0.5rem 1rem;
+        /* cursor: pointer; */
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    /* .cart-button--empty:hover {
+        background-color: #faf4f4;
+        color: #4307ea;
+    } */
 </style>
