@@ -3,7 +3,7 @@
         <nav>
             <ul>
                 <li><a href="/">Accueil</a></li>
-                <li><a href="/products">Produits</a></li>
+                <li><a href="/category">Categories</a></li>
                 <li>
                     <select name="category" id="menu-category">
                         <option value="all">Tous les produits</option>
@@ -12,7 +12,7 @@
                         <option value="electronics">Électronique</option>
                     </select>
                 </li>
-                <li><a href="/promo">Promos</a></li>
+                <li><a href="/promos">Promos</a></li>
             </ul>
         </nav>
     </section>
