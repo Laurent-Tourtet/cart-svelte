@@ -26,15 +26,14 @@ Ce projet est une boutique en ligne créée avec SvelteKit, qui permet d'affiche
 
 1. **Cloner le projet**
    ```bash
-   git clone https://github.com/votre-utilisateur/boutique-sveltekit.git
-   cd boutique-sveltekit
-
+   git clone git@github.com:Laurent-Tourtet/cart-svelte.git
+   cd cart
  2. **Installer les dépendances**
    npm install
 
  3. **Configuration de Stripe**
    - Créer un compte Stripe et obtenir les clés API
-   - Créer un fichier **.env** à la racine du projet et ajouter les clés API :
+   - Créer un fichier **.env** à la racine du projet et ajouter les clés API comme indiquer dans .env.example
  4. **Lancer le projet**
    npm run dev
  5. **Accéder à l'application**
