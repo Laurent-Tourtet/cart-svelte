@@ -1,4 +1,5 @@
 <script>
+    import { page} from '$app/stores';
     import '../global.css';
     import Menu from '$lib/components/Menu.svelte';
 </script>
@@ -8,9 +9,13 @@
 </header>
 
 <div class="layout-container">
-    <Menu />
+    <div class="menu-container">
+        <Menu />
+    </div>
     <div class="content">
-        <slot />
+        <div key={$page.url.pathname}>
+            <slot />
+          </div>
     </div>
 </div>
 
@@ -26,9 +31,10 @@
         display: flex;
     }
 
-    /* Cibler la classe CSS `menu` du composant `Menu.svelte` */
-    .layout-container .menu {
-        flex-basis: 200px; /* Largeur fixe pour le menu */
+    /* Largeur fixe pour le menu pour maintenir la structure */
+    .menu-container {
+        flex-basis: 200px;
+        min-width: 200px;
     }
 
     .content {
