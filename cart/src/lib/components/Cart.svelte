@@ -53,7 +53,7 @@
         
             <p class="cart-article">Total : {$cart.reduce((acc, item) => acc + item.price * item.quantity, 0)} €</p>
             {#if $cart.length > 0}
-            <button class="cart-button" on:click={checkout} aria-label="button got ot paiement">Passer au paiement</button>
+            <button class="cart-button" on:click={checkout} aria-label="button got ot paiement">Valider le paiement</button>
            
             {:else}
             <p class="cart-button--empty">Votre panier est vide</p>

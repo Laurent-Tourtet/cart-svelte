@@ -39,7 +39,10 @@
         {#if isOpen}
           <ul class="submenu">
             <li class="submenu-item">
-              <button on:click={() => navigateToCategory('all')}>Tous les produits</button>
+              <button on:click={() => navigateToCategory('electromenager')}>Electroménager</button>
+            </li>
+            <li class="submenu-item">
+              <button on:click={() => navigateToCategory('informatique')}>Informatique</button>
             </li>
             <li class="submenu-item">
               <button on:click={() => navigateToCategory('phone')}>Téléphonie</button>
