@@ -88,8 +88,9 @@ function handleQuantityChange(event, index) {
   .product-card img {
       max-width: 100%;
       height: 200px;
-      margin-bottom: 10px;
+      margin: 10px 0;
       border-radius: 5px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   }
 
   .product-card h2 {
