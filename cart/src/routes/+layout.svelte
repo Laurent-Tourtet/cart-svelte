@@ -2,6 +2,7 @@
     import { page} from '$app/stores';
     import '../global.css';
     import Menu from '$lib/components/Menu.svelte';
+    import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 </script>
 
 <header class="top">
@@ -14,6 +15,7 @@
     </div>
     <div class="content">
         <div key={$page.url.pathname}>
+            <Breadcrumb />
             <slot />
           </div>
     </div>
