@@ -31,10 +31,10 @@
         <ul class="products-cards--list">
             {#each products as product, index}
                 <li class="products-cards--list-item">
+                    
                     <p class="products-cards--list-item--category"><span>Catégorie:</span> {product.category}</p>
                     <h2 class="products-cards--list-item--name">{product.name}</h2>
                     <img class="products-cards--img" src={product.image} alt={product.name} />
-                    
                     <p class="products-cards--list-item--description">{product.description}</p>
                     <p class="products-cards--list-item--price">Prix unitaire : {product.price} €</p>
 
