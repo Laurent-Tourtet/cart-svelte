@@ -9,9 +9,16 @@
   let filteredProducts = [];
 
   const products = [
-      { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, image: "/images/t-shirt.jpg", category: "clothes" },
-      { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, image: "/images/pantalon.jpg", category: "clothes" },
-      { id: 3, name: 'Basket', description: 'Des baskets stylées', price: 80, image: "/images/basket.jpg", category: "shoes" }
+    { id: 1, name: 'T-shirt', description: 'Un t-shirt en coton bio', price: 20, image: "/images/t-shirt.jpg", category: "vetements" },
+        { id: 2, name: 'Pantalon', description: 'Un pantalon en coton bio', price: 50, image: "/images/pantalon.jpg", category: "vetements" },
+        { id: 3, name: 'Basket', description: 'baskets', price: 80, image: "/images/basket.jpg", category: "chaussures" },
+
+        { id: 4, name: 'Imac', description: 'imac', price: 20, image: "/images/imac-1050833.svg", category: "informatique" },
+        { id: 5, name: 'Iphone', description: 'Iphone', price: 50, image: "/images/iphone.png", category: "telephonie" },
+        { id: 6, name: 'Imac', description: 'Imac', price: 80, image: "/images/imac.png", category: "informatique" },
+        { id: 7, name: 'Machine à laver', description: 'Machine à laver', price: 20, image: "/images/machine.jpg", category: "electromenager" },
+        { id: 8, name: 'Machine à laver', description: 'Machine à laver', price: 50, image: "/images/machine2.png", category: "electromenager" },
+        { id: 9, name: 'Smartphone', description: 'Smartphone', price: 80, image: "/images/smartphone.svg", category: "telephonie" },
   ];
    // Quantités sélectionnées pour chaque produit
    let selectedQuantities = products.map(() => 1);

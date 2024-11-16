@@ -45,13 +45,13 @@
               <button on:click={() => navigateToCategory('informatique')}>Informatique</button>
             </li>
             <li class="submenu-item">
-              <button on:click={() => navigateToCategory('phone')}>Téléphonie</button>
+              <button on:click={() => navigateToCategory('telephonie')}>Téléphonie</button>
             </li>
             <li class="submenu-item">
-              <button on:click={() => navigateToCategory('clothes')}>Vêtements</button>
+              <button on:click={() => navigateToCategory('vetements')}>Vêtements</button>
             </li>
             <li class="submenu-item">
-              <button on:click={() => navigateToCategory('shoes')}>Chaussures</button>
+              <button on:click={() => navigateToCategory('chaussures')}>Chaussures</button>
             </li>
           </ul>
         {/if}
